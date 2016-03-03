@@ -1,7 +1,7 @@
-#由于项目需要介于该功能是在不错， 不过可惜的时作者没出swift版。 我也是在开发中用到这个效果使用就用作者的FDSlideBar项目改写了FDSlideBarswift
-如果有什么不足，多多指教！我也接触ios编程才一个月。如果有什么建议或疑问请到我的博客上给我留言：http://www.blog.jlynet.cn
+#由于项目需要介于该功能是在不错， 不过可惜的是作者没出swift版。 我也是在开发中用到这个效果就用作者的FDSlideBar项目改写了FDSlideBarswift
+如果有什么不足，多多指教！我也是刚接触ios编程才一个月。如果有什么建议或疑问请到我的博客上给我留言：http://www.blog.jlynet.cn
 
-
+# FDSlideBarswift
 # FDSlideBar
 A custom slide bar like the top slide menu of NTES news client used in iOS.
 
