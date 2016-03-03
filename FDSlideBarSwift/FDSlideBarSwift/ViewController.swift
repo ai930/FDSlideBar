@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ViewController: UIViewController,UITableViewDataSource,UITableViewDelegate{
+class ViewController: UIViewController,UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate{
 
     var slideBar:FDSlideBar = FDSlideBar()
     var tableView = UITableView()
@@ -35,8 +35,6 @@ class ViewController: UIViewController,UITableViewDataSource,UITableViewDelegate
         //MJ上拉加载
         self.tableView.mj_footer = MJRefreshAutoFooter(refreshingTarget: self, refreshingAction: "upRefresh")
         
-        self.view.addSubview(tableView)
-
     }
 
     override func didReceiveMemoryWarning() {
@@ -139,13 +137,28 @@ class ViewController: UIViewController,UITableViewDataSource,UITableViewDelegate
         self.tableView.delegate = self
     }
     
+//    #pragma mark - UITableViewDelegate
+//    
+//    - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+//    // Height retrun the width of screen
+//    return CGRectGetWidth(self.view.frame);
+//    }
+//
     
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return 1
+    
+    //pragma mark - UITableViewDataSource
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int{
+        return self.slideBar.itemsTitle.count
     }
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+    //pragma mark - UIScrollViewDelegate
+    func scrollViewDidEndDecelerating(scrollView: UIScrollView) {
+//    NSIndexPath *indexPath = [self.tableView indexPathForRowAtPoint:scrollView.contentOffset];
+      let indexPath:NSIndexPath = self.tableView.indexPathForRowAtPoint(scrollView.contentOffset)!
+        
+    // Select the relating item when scroll the tableView by paging.
+//    [self.slideBar selectSlideBarItemAtIndex:indexPath.row];
+      self.slideBar.selectSlideBarItemAtIndex(indexPath.row as! UInt)
     }
     
     //绘制渲染条目控件返回条目
@@ -172,8 +185,7 @@ class ViewController: UIViewController,UITableViewDataSource,UITableViewDelegate
         //            return cell!
         
         //            TableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"ContentCell"];
-        //获得条目
-        let cell = self.tableView.dequeueReusableCellWithIdentifier("ContentCell")! as! TableViewCell;
+        let cell:TableViewCell = self.tableView.dequeueReusableCellWithIdentifier("ContentCell")! as! TableViewCell;
         
         // Rotate the cell's content 90 angle clockwise to show them rightly
         //            cell.contentView.transform = CGAffineTransformMakeRotation(M_PI_2);
